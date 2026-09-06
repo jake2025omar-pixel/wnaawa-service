@@ -1,5 +1,5 @@
 import { useMemo, useState } from "react";
-import { Link, Route, Switch, useLocation } from "wouter";
+import { Link, Route, Router as WouterRouter, Switch, useLocation } from "wouter";
 import {
   ArrowUpRight,
   Bot,
@@ -130,7 +130,7 @@ function AppShell({ children }: { children: React.ReactNode }) {
   );
 }
 
-function Router() {
+function AppRoutes() {
   return (
     <Switch>
       <Route path="/" component={HomePage} />
@@ -143,7 +143,7 @@ function Router() {
 }
 
 export default function App() {
-  return <AppShell><Router /></AppShell>;
+  return <WouterRouter base="/wnaawa-service"><AppShell><AppRoutes /></AppShell></WouterRouter>;
 }
 
 export { PointsBadge, BrandMark };
