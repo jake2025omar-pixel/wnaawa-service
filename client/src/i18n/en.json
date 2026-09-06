@@ -1,0 +1,20 @@
+{
+  "brand.serviceCenter": "service center",
+  "nav.overview": "Overview",
+  "nav.rewards": "Rewards",
+  "nav.store": "Store",
+  "nav.account": "Account",
+  "home.kicker": "digital services + points",
+  "home.title": "Useful services. Meaningful rewards.",
+  "home.description": "We help you access digital services and get benefits inside the platform — with clear rules and no guaranteed cash claims.",
+  "home.exploreStore": "Explore the store",
+  "home.viewRewards": "View available rewards",
+  "rewards.available": "reward available",
+  "rewards.watchAd": "Watch Ad",
+  "rewards.noAd": "No rewarded ad available currently. Try later.",
+  "rewards.pending": "Verification pending.",
+  "store.pointsOnly": "Points only",
+  "store.cashEligible": "cash eligible",
+  "store.cashBlocked": "Cash checkout is reserved for BOT and WEBSITE services.",
+  "store.validate": "Validate checkout"
+}

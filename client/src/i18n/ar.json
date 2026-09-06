@@ -1,0 +1,20 @@
+{
+  "brand.serviceCenter": "مركز الخدمة",
+  "nav.overview": "نظرة عامة",
+  "nav.rewards": "المكافآت",
+  "nav.store": "المتجر",
+  "nav.account": "الحساب",
+  "home.kicker": "خدمات رقمية + نقاط",
+  "home.title": "خدمات مفيدة. مكافآت ذات معنى.",
+  "home.description": "نساعدك على الوصول إلى الخدمات الرقمية والاستفادة من مزايا المنصة بقواعد واضحة ودون وعود نقدية مضمونة.",
+  "home.exploreStore": "استكشف المتجر",
+  "home.viewRewards": "عرض المكافآت المتاحة",
+  "rewards.available": "مكافأة متاحة",
+  "rewards.watchAd": "مشاهدة الإعلان",
+  "rewards.noAd": "لا يوجد إعلان مكافأة متاح حاليًا. حاول لاحقًا.",
+  "rewards.pending": "التحقق قيد الانتظار.",
+  "store.pointsOnly": "بالنقاط فقط",
+  "store.cashEligible": "النقد متاح",
+  "store.cashBlocked": "الدفع النقدي مخصص لخدمات BOT وWEBSITE فقط.",
+  "store.validate": "التحقق من الدفع"
+}
