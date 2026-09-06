@@ -1,0 +1,8 @@
+{
+  "name": "wnaawa-service-client",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "../node_modules/.bin/vite --config ../vite.config.ts build --outDir ./dist"
+  }
+}
