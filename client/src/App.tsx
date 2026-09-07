@@ -25,6 +25,7 @@ import { Toaster, toast } from "sonner";
 import HomePage from "./pages/Home";
 import WatchPage from "./pages/Watch";
 import StorePage from "./pages/Store";
+import AdminPage from "./pages/Admin";
 import NotFound from "./pages/NotFound";
 import { getBalance } from "./lib/ledger";
 
@@ -33,7 +34,6 @@ const navItems = [
   { href: "/watch", label: "Rewards", icon: Gift },
   { href: "/store", label: "Store", icon: Store },
 ];
-
 function BrandMark() {
   return (
     <div className="brand-lockup">
@@ -94,6 +94,7 @@ function AppShell({ children }: { children: React.ReactNode }) {
           <p className="nav-heading nav-heading-spaced">Explore</p>
           <Link href="/watch" className="nav-link"><Ticket size={18} /><span>Campaigns</span></Link>
           <Link href="/store" className="nav-link"><LayoutGrid size={18} /><span>Services</span></Link>
+          <Link href="/admin" className="nav-link"><ShieldCheck size={18} /><span>Admin</span></Link>
         </nav>
         <div className="sidebar-bottom">
           <div className="sidebar-note">
@@ -119,6 +120,7 @@ function AppShell({ children }: { children: React.ReactNode }) {
           </div>
         </header>
         <div className="page-content">{children}</div>
+        <footer className="site-footer"><span>Wnaawa service center</span><div id="aads-frame-2454518" className="aads-footer" data-aa="2454518"><iframe title="A-ADS placement 2454518" src="//acceptable.a-ads.com/2454518/?size=Adaptive" loading="lazy" referrerPolicy="no-referrer-when-downgrade" /></div></footer>
       </main>
 
       <nav className="mobile-bottom-nav" aria-label="Mobile navigation">
@@ -131,11 +133,13 @@ function AppShell({ children }: { children: React.ReactNode }) {
 }
 
 function AppRoutes() {
+  // make sure to consider if you need authentication for certain routes
   return (
     <Switch>
       <Route path="/" component={HomePage} />
       <Route path="/watch" component={WatchPage} />
       <Route path="/store" component={StorePage} />
+      <Route path="/admin" component={AdminPage} />
       <Route path="/404" component={NotFound} />
       <Route component={NotFound} />
     </Switch>
@@ -143,7 +147,8 @@ function AppRoutes() {
 }
 
 export default function App() {
-  return <WouterRouter base="/wnaawa-service"><AppShell><AppRoutes /></AppShell></WouterRouter>;
+  const routerBase = typeof window !== "undefined" && window.location.pathname.startsWith("/wnaawa-service") ? "/wnaawa-service" : "";
+  return <WouterRouter base={routerBase}><AppShell><AppRoutes /></AppShell></WouterRouter>;
 }
 
 export { PointsBadge, BrandMark };

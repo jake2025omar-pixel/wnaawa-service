@@ -1,8 +1,10 @@
 // Wnaawa style reminder: asymmetric dark bento, restrained gold actions, and clear service-first language.
+import { useEffect, useState } from "react";
 import { Link } from "wouter";
 import { ArrowRight, Bot, ChartNoAxesCombined, Check, ChevronRight, Code2, Coins, Gift, Globe2, Layers3, ShieldCheck, Sparkles, Ticket } from "lucide-react";
 import { PointsBadge } from "../App";
 import { getBalance, getLedger } from "../lib/ledger";
+import { getRewardSessions, getStoredOrders, getStoredTickets, subscribeToLiveState } from "../lib/liveState";
 
 function ServiceVisual({ kind }: { kind: string }) {
   return <div className={`service-visual service-visual-${kind}`} aria-hidden="true"><span className="visual-orb" /><span className="visual-panel" /><span className="visual-line visual-line-one" /><span className="visual-line visual-line-two" /><span className="visual-dot" /></div>;
@@ -15,8 +17,13 @@ const services = [
 ];
 
 export default function Home() {
+  const [, refresh] = useState(0);
+  useEffect(() => subscribeToLiveState(() => refresh((value) => value + 1)), []);
   const balance = getBalance();
   const ledgerCount = getLedger().length;
+  const tickets = getStoredTickets();
+  const orders = getStoredOrders();
+  const rewardSessions = getRewardSessions();
 
   return (
     <div className="page-stack">
@@ -42,9 +49,9 @@ export default function Home() {
       </section>
 
       <section className="metrics-row" aria-label="Account overview">
-        <div className="metric-card glass-card"><div className="metric-icon"><Ticket size={17} /></div><div><span className="metric-label">Tickets</span><strong>12</strong><small>participations</small></div><span className="metric-trend">+3 this month</span></div>
-        <div className="metric-card glass-card"><div className="metric-icon"><Gift size={17} /></div><div><span className="metric-label">Rewards</span><strong>04</strong><small>available entries</small></div><span className="metric-trend">2 active</span></div>
-        <div className="metric-card glass-card"><div className="metric-icon"><ChartNoAxesCombined size={17} /></div><div><span className="metric-label">Orders</span><strong>03</strong><small>service requests</small></div><span className="metric-trend">1 in progress</span></div>
+        <div className="metric-card glass-card"><div className="metric-icon"><Ticket size={17} /></div><div><span className="metric-label">Tickets</span><strong>{String(tickets.length).padStart(2, "0")}</strong><small>real requests</small></div><span className="metric-trend">{tickets.filter((ticket) => ticket.status === "PENDING").length} pending</span></div>
+        <div className="metric-card glass-card"><div className="metric-icon"><Gift size={17} /></div><div><span className="metric-label">Rewards</span><strong>{String(rewardSessions.length).padStart(2, "0")}</strong><small>saved sessions</small></div><span className="metric-trend">{rewardSessions.filter((item) => item.status === "PENDING_VERIFICATION").length} pending</span></div>
+        <div className="metric-card glass-card"><div className="metric-icon"><ChartNoAxesCombined size={17} /></div><div><span className="metric-label">Orders</span><strong>{String(orders.length).padStart(2, "0")}</strong><small>service requests</small></div><span className="metric-trend">{orders.length ? "latest saved" : "none yet"}</span></div>
         <div className="metric-card glass-card"><div className="metric-icon"><ShieldCheck size={17} /></div><div><span className="metric-label">Account</span><strong>Good</strong><small>status verified</small></div><span className="metric-trend is-neutral">protected</span></div>
       </section>
 

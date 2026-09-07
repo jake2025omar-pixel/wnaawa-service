@@ -385,3 +385,22 @@ h2 { margin-top: 9px; font-size: 25px; font-weight: 600; letter-spacing: -.055em
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { scroll-behavior: auto !important; animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
 }
+
+.site-footer{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:24px 0 96px;color:rgba(255,255,255,.45);font-size:12px}
+.aads-footer{width:min(100%,320px);min-height:64px;overflow:hidden;border:1px solid rgba(212,175,55,.12);border-radius:14px;background:rgba(22,22,22,.72)}
+.aads-footer iframe{display:block;width:100%;height:64px;border:0}
+.inline-actions{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.guard-controls input{min-width:170px}
+.admin-table{min-width:720px}
+.admin-table-row{display:grid;grid-template-columns:1fr 2fr 1.4fr 1.2fr 1fr;gap:16px;align-items:center;padding:14px 16px;border-bottom:1px solid rgba(255,255,255,.06);font-size:13px}
+.admin-table-row:last-child{border-bottom:0}
+.admin-table-head{color:rgba(255,255,255,.45);font-size:11px;text-transform:uppercase;letter-spacing:.12em}
+.admin-table-row strong{color:#f4f1e8}
+.admin-table-row svg{vertical-align:middle;margin-right:5px;color:#d4af37}
+.status-pill{justify-self:start;padding:5px 9px;border-radius:999px;background:rgba(212,175,55,.12);color:#d4af37;font-size:10px;letter-spacing:.08em}
+.admin-order-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+.admin-order-card{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:20px}
+.admin-order-card h3{margin:10px 0 6px}
+.admin-order-card p{margin:0;color:rgba(255,255,255,.55);font-size:13px}
+.empty-state{display:flex;align-items:center;gap:10px;padding:24px;color:rgba(255,255,255,.55)}
+@media (max-width:720px){.site-footer{align-items:flex-start;flex-direction:column;padding-bottom:120px}.admin-order-grid{grid-template-columns:1fr}.admin-table-row{gap:10px;padding:12px 10px}}
