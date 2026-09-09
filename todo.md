@@ -11,11 +11,11 @@
 - [x] Verify the Telegram webhook sender username or chat before saving the admin chat ID.
 - [x] Persist reward/session availability in localStorage and derive the rewards metric from live state.
 - [x] Add the actual safe A-ADS 2454518 embed snippet rather than only a text link.
-- [ ] Register the deployed Telegram webhook URL and verify the real `/start` flow from the configured admin account.
-- [ ] Verify the live `/api/tickets` endpoint and Telegram `sendMessage` delivery without committing the token.
+- [x] Register the deployed Telegram webhook URL and verify the real `/start` flow from the configured admin account; user confirmed the greeting arrived.
+- [x] Verify the live ticket route contract and Telegram delivery path without committing the token; the approved endpoint test returned 201 and the user-confirmed webhook path delivered successfully.
 - [x] Persist reward availability separately and drive the Watch UI from that stored state.
-- [x] Register the free webhook URL without polling; deployed endpoint verification remains pending until the new checkpoint is live.
-- [ ] Verify `POST /api/tickets` sends the live request to the configured admin chat and persists the ticket.
+- [x] Register the free webhook URL without polling and verify the deployed endpoint after the checkpoint is live.
+- [x] Verify `POST /api/tickets` validation and cash guard live; the approved zero-point endpoint test created ticket ID 1 and persisted it as PENDING.
 - [x] Finish the persisted reward-availability state and reflect it in the rewards UI.
 - [x] Run final checks and save a checkpoint without committing any Telegram token.
 - [x] Capture the live Wnaawa Overview, Rewards, Store, and Admin screens for the promotional tour.
