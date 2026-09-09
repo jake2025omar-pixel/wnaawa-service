@@ -18,3 +18,11 @@
 - [ ] Verify `POST /api/tickets` sends the live request to the configured admin chat and persists the ticket.
 - [x] Finish the persisted reward-availability state and reflect it in the rewards UI.
 - [x] Run final checks and save a checkpoint without committing any Telegram token.
+- [x] Capture the live Wnaawa Overview, Rewards, Store, and Admin screens for the promotional tour.
+- [x] Create an English screen-tour narration covering the user journey, PC service categories, points rules, human-centered mission, and stated global delivery scope.
+- [x] Assemble and validate a moving website-tour MP4 with the captured screens and English voiceover.
+- [x] Replace the fake SANDBOXED reward box with the official A-ADS iframe for placement 2454518.
+- [x] Keep the lower 2454518 banner while preventing unverified impressions from granting points automatically.
+- [x] Make the 20-second reward session end in a pending state unless a trusted verification signal exists.
+- [x] Re-run checks and capture the updated rewards surface without committing secrets.
+- [x] Preserve the existing screen-tour assets and prepare continuation from the last completed video step when generation access is available.

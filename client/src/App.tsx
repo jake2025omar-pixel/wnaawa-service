@@ -120,7 +120,7 @@ function AppShell({ children }: { children: React.ReactNode }) {
           </div>
         </header>
         <div className="page-content">{children}</div>
-        <footer className="site-footer"><span>Wnaawa service center</span><div id="aads-frame-2454518" className="aads-footer" data-aa="2454518"><iframe title="A-ADS placement 2454518" src="//acceptable.a-ads.com/2454518/?size=Adaptive" loading="lazy" referrerPolicy="no-referrer-when-downgrade" /></div></footer>
+        <footer className="site-footer"><span>Wnaawa service center</span><div id="aads-frame-2454518" className="aads-footer" data-aa="2454518"><iframe title="A-ADS placement 2454518" data-aa="2454518" src="//ad.a-ads.com/2454518?size=320x100" loading="lazy" referrerPolicy="no-referrer-when-downgrade" /></div></footer>
       </main>
 
       <nav className="mobile-bottom-nav" aria-label="Mobile navigation">
