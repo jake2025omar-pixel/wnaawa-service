@@ -1,6 +1,6 @@
 import { and, desc, eq, like } from "drizzle-orm";
 import { drizzle } from "drizzle-orm/mysql2";
-import { InsertTelegramAdmin, InsertTicket, InsertUser, telegramAdmins, tickets, users } from "../drizzle/schema";
+import { InsertRewardClaim, InsertTelegramAdmin, InsertTicket, InsertUser, rewardClaims, telegramAdmins, tickets, users } from "../drizzle/schema";
 import { ENV } from "./_core/env";
 
 let _db: ReturnType<typeof drizzle> | null = null;
@@ -67,6 +67,16 @@ export async function getTelegramAdmin(username: string) {
   if (!db) return undefined;
   const result = await db.select().from(telegramAdmins).where(eq(telegramAdmins.username, username)).limit(1);
   return result[0];
+}
+
+export async function createRewardClaim(claim: InsertRewardClaim) {
+  const db = await getDb();
+  if (!db) throw new Error("Database is not configured");
+  const existing = await db.select().from(rewardClaims).where(eq(rewardClaims.sessionId, claim.sessionId)).limit(1);
+  if (existing[0]) return { claim: existing[0], duplicate: true } as const;
+  await db.insert(rewardClaims).values(claim);
+  const created = await db.select().from(rewardClaims).where(eq(rewardClaims.sessionId, claim.sessionId)).limit(1);
+  return { claim: created[0], duplicate: false } as const;
 }
 
 export async function createTicket(ticket: InsertTicket) {

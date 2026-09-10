@@ -1,5 +1,6 @@
 import type { Express, Request, Response } from "express";
-import { createTicket, getTelegramAdmin, getUserByOpenId, listTickets, registerTelegramAdmin, updateTicketStatus, type TicketStatus } from "./db";
+import { createHmac, timingSafeEqual } from "node:crypto";
+import { createRewardClaim, createTicket, getTelegramAdmin, getUserByOpenId, listTickets, registerTelegramAdmin, updateTicketStatus, type TicketStatus } from "./db";
 import { getAdminUsername, sendTelegramMessage } from "./telegram";
 import { sdk } from "./_core/sdk";
 
@@ -20,6 +21,14 @@ function sendJson(res: Response, status: number, payload: unknown) {
 }
 
 const TICKET_STATUSES: TicketStatus[] = ["PENDING", "PAID", "IN_PROGRESS", "COMPLETED", "CANCELLED"];
+
+function validRewardSignature(payload: string, signature: string | undefined) {
+  const secret = process.env.REWARD_PROVIDER_WEBHOOK_SECRET;
+  if (!secret || !signature) return false;
+  const expected = createHmac("sha256", secret).update(payload).digest("hex");
+  const provided = signature.replace(/^sha256=/, "");
+  return provided.length === expected.length && timingSafeEqual(Buffer.from(provided), Buffer.from(expected));
+}
 
 async function requireAdmin(req: Request, res: Response) {
   try {
@@ -59,6 +68,24 @@ export function registerTelegramRoutes(app: Express) {
     } catch (error) {
       console.error("[Telegram webhook] Failed:", error);
       return sendJson(res, 500, { ok: false, error: "Webhook handling failed" });
+    }
+  });
+
+  app.post("/api/rewards/verify", async (req: Request, res: Response) => {
+    const sessionId = String(req.body?.sessionId || "").trim();
+    const provider = String(req.body?.provider || "").trim();
+    const placement = String(req.body?.placement || "").trim();
+    const canonical = JSON.stringify({ sessionId, provider, placement });
+    if (!sessionId || !provider || !placement) return sendJson(res, 400, { ok: false, error: "sessionId, provider, and placement are required" });
+    if (!validRewardSignature(canonical, req.headers["x-reward-signature"] as string | undefined)) {
+      return sendJson(res, 401, { ok: false, error: "Trusted reward signature required" });
+    }
+    try {
+      const result = await createRewardClaim({ sessionId, provider, placement, points: 5 });
+      return sendJson(res, 200, { ok: true, duplicate: result.duplicate, claimId: result.claim?.id, creditedPoints: result.claim?.points ?? 5 });
+    } catch (error) {
+      console.error("[Rewards] Verification failed:", error);
+      return sendJson(res, 500, { ok: false, error: "Reward verification failed" });
     }
   });
 

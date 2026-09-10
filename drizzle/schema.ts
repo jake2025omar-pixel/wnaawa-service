@@ -20,6 +20,15 @@ export const telegramAdmins = mysqlTable("telegram_admins", {
   updatedAt: timestamp("updatedAt").defaultNow().onUpdateNow().notNull(),
 });
 
+export const rewardClaims = mysqlTable("reward_claims", {
+  id: int("id").autoincrement().primaryKey(),
+  sessionId: varchar("sessionId", { length: 128 }).notNull().unique(),
+  provider: varchar("provider", { length: 64 }).notNull(),
+  placement: varchar("placement", { length: 64 }).notNull(),
+  points: int("points").default(5).notNull(),
+  createdAt: timestamp("createdAt").defaultNow().notNull(),
+});
+
 export const tickets = mysqlTable("tickets", {
   id: int("id").autoincrement().primaryKey(),
   serviceName: varchar("serviceName", { length: 255 }).notNull(),
@@ -35,5 +44,7 @@ export type User = typeof users.$inferSelect;
 export type InsertUser = typeof users.$inferInsert;
 export type TelegramAdmin = typeof telegramAdmins.$inferSelect;
 export type InsertTelegramAdmin = typeof telegramAdmins.$inferInsert;
+export type RewardClaim = typeof rewardClaims.$inferSelect;
+export type InsertRewardClaim = typeof rewardClaims.$inferInsert;
 export type Ticket = typeof tickets.$inferSelect;
 export type InsertTicket = typeof tickets.$inferInsert;

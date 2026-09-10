@@ -26,11 +26,11 @@
 - [x] Make the 20-second reward session end in a pending state unless a trusted verification signal exists.
 - [x] Re-run checks and capture the updated rewards surface without committing secrets.
 - [x] Preserve the existing screen-tour assets and prepare continuation from the last completed video step when generation access is available.
-- [ ] Add a server-side trusted reward-verification hook that can accept provider callbacks before crediting +5 points.
-- [ ] Add server-backed admin ticket listing, filters, status updates, and Telegram ticket visibility.
-- [ ] Remove only the approved `Wnaawa live endpoint test` record after confirming its exact row.
-- [ ] Re-capture the updated Overview, Rewards, Store, and Admin screens.
-- [ ] Rebuild the detailed English screen-tour video from the updated site captures.
+- [x] Implement a signed `/api/rewards/verify` hook with idempotent +5 reward-claim records; configure `REWARD_PROVIDER_WEBHOOK_SECRET` when a supported provider callback is available.
+- [x] Add server-backed admin ticket listing, filters, status updates, and Telegram ticket visibility.
+- [x] Remove only the approved `Wnaawa live endpoint test` record after confirming its exact row; the targeted database delete returned no remaining row.
+- [x] Re-capture the updated Overview, Rewards, Store, and Admin screens.
+- [x] Rebuild the detailed English screen-tour video from the updated site captures.
 - [x] Audit current Rewards markup, Vite plugins, server startup dependencies, and GitHub Pages artifact flow.
 - [x] Replace the Rewards placeholder surface with the exact direct A-ADS iframe requested by the user.
 - [x] Remove debug-collector injection from the development and production build pipeline.
@@ -38,4 +38,4 @@
 - [x] Build the client, verify the new bundle contains no `debug-collector.js` or `SANDBOXED`, and copy assets to the GitHub Pages root with `404.html` and `.nojekyll`.
 - [x] Push the stabilized GitHub Pages artifacts to `main`.
 - [x] Resume the promotional website-tour video only after the site stabilization is complete.
-- [ ] Rebuild after removing the runtime plugin and confirm `dist/public` itself contains no `__manus__/debug-collector.js` artifact.
+- [x] Rebuild after removing the runtime plugin and confirm `dist/public` itself contains no `__manus__/debug-collector.js` artifact.
