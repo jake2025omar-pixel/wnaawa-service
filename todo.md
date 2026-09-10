@@ -31,10 +31,11 @@
 - [ ] Remove only the approved `Wnaawa live endpoint test` record after confirming its exact row.
 - [ ] Re-capture the updated Overview, Rewards, Store, and Admin screens.
 - [ ] Rebuild the detailed English screen-tour video from the updated site captures.
-- [ ] Audit current Rewards markup, Vite plugins, server startup dependencies, and GitHub Pages artifact flow.
-- [ ] Replace the Rewards placeholder surface with the exact direct A-ADS iframe requested by the user.
-- [ ] Remove debug-collector injection from the development and production build pipeline.
-- [ ] Resolve blocking runtime/build issues and verify all primary routes and API guards.
-- [ ] Build the client, verify the new bundle contains no `debug-collector.js` or `SANDBOXED`, and copy assets to the GitHub Pages root with `404.html` and `.nojekyll`.
-- [ ] Push the stabilized GitHub Pages artifacts to `main`.
-- [ ] Resume the promotional website-tour video only after the site stabilization is complete.
+- [x] Audit current Rewards markup, Vite plugins, server startup dependencies, and GitHub Pages artifact flow.
+- [x] Replace the Rewards placeholder surface with the exact direct A-ADS iframe requested by the user.
+- [x] Remove debug-collector injection from the development and production build pipeline.
+- [x] Resolve blocking runtime/build issues and verify all primary routes and API guards.
+- [x] Build the client, verify the new bundle contains no `debug-collector.js` or `SANDBOXED`, and copy assets to the GitHub Pages root with `404.html` and `.nojekyll`.
+- [x] Push the stabilized GitHub Pages artifacts to `main`.
+- [x] Resume the promotional website-tour video only after the site stabilization is complete.
+- [ ] Rebuild after removing the runtime plugin and confirm `dist/public` itself contains no `__manus__/debug-collector.js` artifact.
