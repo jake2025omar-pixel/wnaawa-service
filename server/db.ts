@@ -1,4 +1,4 @@
-import { desc, eq } from "drizzle-orm";
+import { and, desc, eq, like } from "drizzle-orm";
 import { drizzle } from "drizzle-orm/mysql2";
 import { InsertTelegramAdmin, InsertTicket, InsertUser, telegramAdmins, tickets, users } from "../drizzle/schema";
 import { ENV } from "./_core/env";
@@ -77,8 +77,20 @@ export async function createTicket(ticket: InsertTicket) {
   return insertId;
 }
 
-export async function listTickets() {
+export type TicketStatus = "PENDING" | "PAID" | "IN_PROGRESS" | "COMPLETED" | "CANCELLED";
+
+export async function listTickets(filters?: { status?: TicketStatus; query?: string }) {
   const db = await getDb();
   if (!db) return [];
-  return db.select().from(tickets).orderBy(desc(tickets.createdAt));
+  const conditions = [];
+  if (filters?.status) conditions.push(eq(tickets.status, filters.status));
+  if (filters?.query) conditions.push(like(tickets.serviceName, `%${filters.query}%`));
+  const where = conditions.length ? and(...conditions) : undefined;
+  return db.select().from(tickets).where(where).orderBy(desc(tickets.createdAt));
+}
+
+export async function updateTicketStatus(id: number, status: TicketStatus) {
+  const db = await getDb();
+  if (!db) throw new Error("Database is not configured");
+  await db.update(tickets).set({ status, updatedAt: new Date() }).where(eq(tickets.id, id));
 }
